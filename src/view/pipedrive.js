@@ -6,14 +6,14 @@ module.exports = {
     },
     showList: (list, total, res) => {
         res.status(200).json({
-            data: list.map((user) =>
-                user
+            data: list.map((deal) =>
+                deal
             ),
             total
         });
     },
-    showOne: (user, res) => {
-        res.status(200).json(user);
+    showOne: (deal, res) => {
+        res.status(200).json(deal);
     },
     showUpdated: (status, res) => {
         res.status(200).json({
