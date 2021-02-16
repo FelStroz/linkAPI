@@ -12,8 +12,8 @@ module.exports = {
             total
         });
     },
-    showOne: (user, res) => {
-        res.status(200).json(user);
+    showOne: (deal, res) => {
+        res.status(200).json(deal);
     },
     showUpdated: (status, res) => {
         res.status(200).json({
