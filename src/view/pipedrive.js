@@ -6,8 +6,8 @@ module.exports = {
     },
     showList: (list, total, res) => {
         res.status(200).json({
-            data: list.map((user) =>
-                user
+            data: list.map((deal) =>
+                deal
             ),
             total
         });
