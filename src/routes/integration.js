@@ -4,6 +4,7 @@ let integration = require('../controller/integration');
 const userMiddleware = require('../middleware/auth');
 
 routes.use(userMiddleware);
-routes.post('/', integration.create);
+routes.get('/create', integration.create);
+routes.get('/', integration.getList);
 
 module.exports = routes;

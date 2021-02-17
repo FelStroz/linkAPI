@@ -6,12 +6,12 @@ module.exports = {
     },
     showList: (list, total, res) => {
         res.status(200).json({
-            data: list.map(integrated => integrated),
+            data: list.map(integrated => one(integrated)),
             total
         });
     },
     showOne: (integrated, res) => {
-        res.status(200).json(integrated);
+        res.status(200).json(one(integrated));
     },
     showUpdated: (status, res) => {
         res.status(200).json({
@@ -34,3 +34,16 @@ module.exports = {
         });
     },
 };
+
+function one({_id: id, date, deals, total, creationDate}) {
+    return {
+        data: {
+            id,
+            date,
+            deals,
+            total,
+            creationDate
+        }
+    }
+}
+
