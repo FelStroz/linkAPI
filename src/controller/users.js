@@ -49,10 +49,10 @@ module.exports = {
         }).catch(e => views.error(e, 500, "error", res));
     },
     login: async (req, res) => {
-        let {email, password} = req.body;
-        if (!email || !password) return views.error({"message": "Usuário não autorizado!"}, 401, "Unauthorized", res);
+        let {name, password} = req.body;
+        if (!name || !password) return views.error({"message": "Usuário não autorizado!"}, 401, "Unauthorized", res);
 
-        Users.findOne({'$or': [{'email': email}, {'name': email}]}).then(async user => {
+        Users.findOne({'$or': [{'name': name}]}).then(async user => {
 
             if (!user) return views.error({"message": "Usuário não encontrado!"}, 404, "Not Found", res);
             if (!await bcrypt.compare(password, user.password)) return views.error({"message": "Senha incorreta!"}, 403, "Forbidden", res);
