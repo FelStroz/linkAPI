@@ -87,7 +87,7 @@ async function requestToBling(deal, blingKey) {
         if (response.data.retorno.erros)
             console.log(response.data.retorno.erros.erro);
         else {
-            console.log(response.data.retorno.pedidos);
+            // console.log(response.data.retorno.pedidos);
             return response.data.retorno.pedidos;
         }
     }).catch(function (error) {
