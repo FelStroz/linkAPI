@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {isEmail} = require('validator');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
@@ -38,8 +37,8 @@ UserSchema.pre('findOneAndUpdate', function (next) {
 
     if (user.name && user.name === "")
         return next(new Error('The name must not be empty'));
-    if (user.name && user.email === "")
-        return next(new Error('The name must not be empty'));
+    if (user.email && user.email === "")
+        return next(new Error('The email must not be empty'));
 
     if (user.password) {
         if (user.password.length < 6) return next(new Error('The password must be at least 6 characters'));
@@ -48,9 +47,8 @@ UserSchema.pre('findOneAndUpdate', function (next) {
             user.password = hash;
             next();
         });
-    } else {
+    } else
         next(user);
-    }
 
 });
 

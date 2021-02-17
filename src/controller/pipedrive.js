@@ -21,7 +21,7 @@ module.exports = {
         params.append("status", status);
         params.append("expected_close_date", `${year}-${month}-${day}`);
 
-        fetch(`${process.env.API_URL}/deals?api_token=${apiToken}`, {
+        fetch(`${process.env.PIPEDRIVE_URL}/deals?api_token=${apiToken}`, {
             method: 'POST',
             body: params
         })
@@ -33,7 +33,7 @@ module.exports = {
     getOne: async (req, res) => {
         if (!req.users) return views.error({"message": "Usuário não autorizado!"}, 401, "Unauthorized", res);
         let {id = 1} = req.params, {apiToken} = req.query;
-        fetch(`${process.env.API_URL}/deals/${id}?api_token=${apiToken}`)
+        fetch(`${process.env.PIPEDRIVE_URL}/deals/${id}?api_token=${apiToken}`)
             .then(res => res.json())
             .then(deal => views.showOne(deal.data, res))
             .catch(e => views.error(e, e.code ? e.code : 500, "Error", res));
@@ -42,7 +42,7 @@ module.exports = {
     getList: async (req, res) => {
         if (!req.users) return views.error({"message": "Usuário não autorizado!"}, 401, "Unauthorized", res);
         let {status = 'all_not_deleted', apiToken} = req.query;
-        fetch(`${process.env.API_URL}/deals?status=${status}&start=0&api_token=${apiToken}`)
+        fetch(`${process.env.PIPEDRIVE_URL}/deals?status=${status}&start=0&api_token=${apiToken}`)
             .then(res => res.json())
             .then(deals => views.showList(deals.data, deals.data.length, res))
             .catch(e => views.error(e, e.code ? e.code : 500, "Error", res));
@@ -55,7 +55,7 @@ module.exports = {
         const params = new URLSearchParams();
         params.append("status", status);
 
-        fetch(`${process.env.API_URL}/deals/${id}?api_token=${apiToken}`, {
+        fetch(`${process.env.PIPEDRIVE_URL}/deals/${id}?api_token=${apiToken}`, {
             method: 'PUT',
             body: params
         })
@@ -66,7 +66,7 @@ module.exports = {
     delete: async (req, res) => {
         if (!req.users) return views.error({"message": "Usuário não autorizado!"}, 401, "Unauthorized", res);
         let {id} = req.params, {apiToken} = req.query;
-        fetch(`${process.env.API_URL}/deals/${id}?api_token=${apiToken}`, {
+        fetch(`${process.env.PIPEDRIVE_URL}/deals/${id}?api_token=${apiToken}`, {
             method: 'DELETE'
         })
             .then(() => views.showDeleted("Deleted", res))
